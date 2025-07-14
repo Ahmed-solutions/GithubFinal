@@ -1,0 +1,45 @@
+name: Deploy to Development
+
+on: 
+  push:
+    branches: [production]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install parcel --save-dev
+      
+      - name: Build project
+        run: npx parcel build "src/index.html"
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    permissions:
+      contents: read
+      pages: write
+      id_token: write
+
+      steps:
+        - name: Deploy to github pages
+          uses: actions/deploy-pages@v4
+
