@@ -3,6 +3,6 @@
 
     "rules": {
         "selector-type-case": "lower",
-        "no-duplicate-selector": true
+        "no-duplicate-selectors": true
     }
 }
