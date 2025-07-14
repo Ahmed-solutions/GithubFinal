@@ -20,7 +20,7 @@ jobs:
           node-version: 16
 
       - name: Install Style Lint
-        run: npm install stylelint
+        run: npm install stylelint stylelint-config-standard
 
       - name: Lint files run
         run: npx stylelint "styles/**/*.css"
